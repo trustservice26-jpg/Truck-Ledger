@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabase';
-import { Truck, ShieldCheck, KeyRound, UserPlus, LogIn, Sparkles, Check } from 'lucide-react';
+import { Truck, ShieldCheck, KeyRound, UserPlus, LogIn } from 'lucide-react';
 import bannerImage from '../assets/images/fleet_ledger_banner_1790516387387.jpg';
 
 interface AuthViewProps {
@@ -84,7 +84,7 @@ export const AuthView: React.FC<AuthViewProps> = () => {
     }
   };
 
-  const handleQuickDemoLogin = async (vNum: string, pass: string = 'password') => {
+  const handleQuickDemoLogin = async (vNum: string, pass: string = 'password123') => {
     setLoading(true);
     setMessage(null);
     setVehicleNumber(vNum);
@@ -103,54 +103,55 @@ export const AuthView: React.FC<AuthViewProps> = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-10 sm:py-12 px-3 sm:px-6 lg:px-8">
       {/* Top Banner & Header info */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center mb-5">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
           FleetLedger
         </h1>
-        <p className="mt-1.5 text-xs text-slate-600">
-          Commercial Vehicle Daily Income & Cost Management System
+        <p className="mt-1 text-xs text-slate-600">
+          Commercial Vehicle Daily Income &amp; Cost Management System
         </p>
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-xl border border-slate-200 sm:rounded-2xl sm:px-10 overflow-hidden">
+        <div className="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-xl border border-slate-200 rounded-2xl overflow-hidden">
           {/* Hero Fleet Visual Header */}
-          <div className="relative -mx-4 -mt-8 sm:-mx-10 mb-6 h-36 overflow-hidden bg-slate-900">
+          <div className="relative -mx-4 -mt-6 sm:-mx-10 sm:-mt-8 mb-5 h-32 sm:h-36 overflow-hidden bg-slate-900">
             <img
               src={bannerImage}
               alt="Commercial vehicle fleet operations"
               className="w-full h-full object-cover opacity-80"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent flex items-end p-5">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent flex items-end p-4 sm:p-5">
               <div className="text-white">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-300">
-                  Daily Transport Ledger
+                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-blue-300">
+                  Fleet Transport Ledger
                 </span>
-                <h2 className="text-base font-bold text-white">
-                  Driver Earnings & Expense Ledger
+                <h2 className="text-sm sm:text-base font-bold text-white">
+                  Driver Earnings &amp; Expense Ledger
                 </h2>
               </div>
             </div>
           </div>
 
           {/* Mode Switcher Tabs */}
-          <div className="flex border-b border-slate-200 mb-6">
+          <div className="flex border-b border-slate-200 mb-5">
             <button
               type="button"
               onClick={() => {
                 setIsRegister(false);
                 setMessage(null);
               }}
-              className={`flex-1 pb-3 text-xs font-semibold text-center border-b-2 transition-colors ${
+              className={`flex-1 pb-2.5 text-xs font-semibold text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
                 !isRegister
-                  ? 'border-blue-600 text-blue-600'
+                  ? 'border-blue-600 text-blue-600 font-bold'
                   : 'border-transparent text-slate-500 hover:text-slate-700'
               }`}
             >
-              Sign In to Vehicle
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Sign In to Vehicle</span>
             </button>
             <button
               type="button"
@@ -158,18 +159,19 @@ export const AuthView: React.FC<AuthViewProps> = () => {
                 setIsRegister(true);
                 setMessage(null);
               }}
-              className={`flex-1 pb-3 text-xs font-semibold text-center border-b-2 transition-colors ${
+              className={`flex-1 pb-2.5 text-xs font-semibold text-center border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
                 isRegister
-                  ? 'border-blue-600 text-blue-600'
+                  ? 'border-blue-600 text-blue-600 font-bold'
                   : 'border-transparent text-slate-500 hover:text-slate-700'
               }`}
             >
-              Register New Vehicle
+              <UserPlus className="w-3.5 h-3.5" />
+              <span>Register New Vehicle</span>
             </button>
           </div>
 
           {/* Main Form */}
-          <form className="space-y-4" onSubmit={handleAuth}>
+          <form className="space-y-3.5" onSubmit={handleAuth}>
             {isRegister && (
               <>
                 <div>
@@ -188,7 +190,7 @@ export const AuthView: React.FC<AuthViewProps> = () => {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Contact Phone Number
+                    Contact Phone Number (Optional)
                   </label>
                   <input
                     type="tel"
@@ -208,7 +210,7 @@ export const AuthView: React.FC<AuthViewProps> = () => {
               <input
                 type="text"
                 required
-                placeholder="e.g. KA-01-AB-1234 or ADM-001"
+                placeholder="e.g. KA-01-AB-1234 or 1483"
                 value={vehicleNumber}
                 onChange={e => setVehicleNumber(e.target.value.toUpperCase())}
                 className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white font-mono-tabular uppercase font-semibold transition-colors"
@@ -231,7 +233,7 @@ export const AuthView: React.FC<AuthViewProps> = () => {
 
             {message && (
               <div
-                className={`p-3 rounded-lg text-xs ${
+                className={`p-3 rounded-lg text-xs leading-relaxed ${
                   message.type === 'error'
                     ? 'bg-rose-50 text-rose-800 border border-rose-200'
                     : message.type === 'success'
@@ -247,21 +249,29 @@ export const AuthView: React.FC<AuthViewProps> = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-colors"
               >
-                {loading
-                  ? 'Processing...'
-                  : isRegister
-                  ? 'Register Vehicle Account'
-                  : 'Access Driver Ledger'}
+                {loading ? (
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : isRegister ? (
+                  <>
+                    <UserPlus className="w-4 h-4" />
+                    <span>Register Vehicle Account</span>
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="w-4 h-4" />
+                    <span>Access Vehicle Ledger</span>
+                  </>
+                )}
               </button>
             </div>
           </form>
 
           {/* Quick Demo Logins strip */}
-          <div className="mt-6 pt-5 border-t border-slate-200">
-            <span className="block text-[11px] font-semibold text-slate-500 mb-2 uppercase tracking-wide">
-              Instant 1-Click Demo Profiles:
+          <div className="mt-5 pt-4 border-t border-slate-200">
+            <span className="block text-[10px] font-semibold text-slate-500 mb-2 uppercase tracking-wide">
+              Or Try 1-Click Demo Profiles:
             </span>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <button

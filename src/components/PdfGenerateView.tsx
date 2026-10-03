@@ -143,30 +143,30 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
       {/* Top Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
-        <div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-wider text-blue-300 uppercase bg-blue-500/20 px-2 py-0.5 rounded">
+      <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-xl sm:rounded-2xl p-3 sm:p-5 md:p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 no-print">
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            <span className="text-[9px] sm:text-[11px] font-bold tracking-wider text-blue-300 uppercase bg-blue-500/20 px-1.5 py-0.5 sm:px-2 rounded">
               Statement &amp; Settlement Document
             </span>
-            <span className="text-[10px] sm:text-[11px] font-mono-tabular px-2 py-0.5 bg-white/10 text-slate-200 rounded">
+            <span className="text-[9px] sm:text-[11px] font-mono-tabular px-1.5 py-0.5 sm:px-2 bg-white/10 text-slate-200 rounded">
               {profile.vehicle_number}
             </span>
           </div>
-          <h1 className="text-lg sm:text-2xl font-black tracking-tight mt-1">
+          <h1 className="text-base sm:text-2xl font-black tracking-tight mt-0.5 sm:mt-1">
             Generate Official PDF Statement
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+          <p className="text-[11px] sm:text-sm text-slate-300 mt-0.5 sm:mt-1 max-w-2xl line-clamp-2 sm:line-clamp-none">
             Configure report date range, preview your formal financial statement, and generate crisp, downloadable PDF ledger documents ready for printing or accountant settlement.
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full md:w-auto shrink-0">
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full md:w-auto shrink-0">
           <button
             onClick={handleDownloadPdf}
             disabled={isGeneratingPdf}
-            className={`col-span-2 sm:col-span-1 flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl shadow-md transition-all ${
+            className={`col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 text-xs font-bold rounded-lg sm:rounded-xl shadow-md transition-all ${
               downloadSuccess
                 ? 'bg-emerald-600 text-white'
                 : 'bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-75'
@@ -174,12 +174,12 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
           >
             {downloadSuccess ? (
               <>
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>PDF Downloaded!</span>
               </>
             ) : (
               <>
-                <FileText className="w-4 h-4" />
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{isGeneratingPdf ? 'Generating PDF...' : 'Download PDF Statement'}</span>
               </>
             )}
@@ -187,7 +187,7 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
 
           <button
             onClick={() => window.print()}
-            className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-xl border border-white/20 transition-colors"
+            className="flex items-center justify-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg sm:rounded-xl border border-white/20 transition-colors"
             title="Browser print dialog"
           >
             <Printer className="w-3.5 h-3.5" />
@@ -196,7 +196,7 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
 
           <button
             onClick={() => setIsWhatsAppOpen(true)}
-            className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition-colors shadow-xs"
+            className="flex items-center justify-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg sm:rounded-xl transition-colors shadow-xs"
             title="Share settlement statement via WhatsApp"
           >
             <MessageSquare className="w-3.5 h-3.5" />
@@ -206,7 +206,7 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
           <button
             onClick={handleExportAllRecordsCSV}
             disabled={isExportingAllCsv}
-            className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-semibold rounded-xl transition-colors shadow-xs"
+            className="flex items-center justify-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-semibold rounded-lg sm:rounded-xl transition-colors shadow-xs"
             title="Export all financial records to a CSV file to backup offline"
           >
             {isExportingAllCsv ? (
@@ -214,12 +214,12 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
             ) : (
               <Download className="w-3.5 h-3.5" />
             )}
-            <span>Backup All (CSV)</span>
+            <span>Backup All</span>
           </button>
 
           <button
             onClick={() => exportRecordsToCSV(records, profile.vehicle_number, profile.name, from, to)}
-            className="col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded-xl border border-white/20 transition-colors"
+            className="col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded-lg sm:rounded-xl border border-white/20 transition-colors"
             title="Export current period as CSV"
           >
             <Download className="w-3.5 h-3.5" />
@@ -436,18 +436,44 @@ export const PdfGenerateView: React.FC<PdfGenerateViewProps> = ({ profile }) => 
 
       {/* Live On-Screen Document Statement Preview */}
       <div className="space-y-3">
-        <div className="flex items-center justify-between no-print text-xs">
-          <span className="font-bold text-slate-700 flex items-center gap-1.5">
-            <Eye className="w-4 h-4 text-blue-600" />
-            <span>Document Statement Preview (Exact PDF Representation)</span>
-          </span>
-          <span className="text-slate-500">
-            A4 Print Layout · Printable &amp; Archival
-          </span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between no-print gap-2 bg-slate-100 p-3 rounded-xl border border-slate-200">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-blue-600 text-white rounded-lg">
+              <Eye className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-slate-900">
+                Statement Preview (Exact PDF Representation)
+              </div>
+              <div className="text-[10px] text-slate-500 font-medium">
+                A4 Print Layout · Printable &amp; Archival (210 × 297 mm)
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg shadow-2xs transition-colors"
+              title="Print document on A4 paper"
+            >
+              <Printer className="w-3.5 h-3.5 text-slate-600" />
+              <span>Print A4</span>
+            </button>
+            <button
+              onClick={handleDownloadPdf}
+              disabled={isGeneratingPdf}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-75 rounded-lg shadow-2xs transition-colors"
+              title="Download exact matching PDF statement"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>{isGeneratingPdf ? 'Generating...' : 'Download PDF'}</span>
+            </button>
+          </div>
         </div>
 
-        <div className="bg-slate-200/70 p-2 sm:p-6 rounded-2xl border border-slate-300 shadow-inner overflow-x-auto">
-          <div className="max-w-4xl mx-auto">
+        <div className="bg-slate-200/80 p-1.5 sm:p-6 md:p-8 rounded-2xl border border-slate-300 shadow-inner overflow-x-auto">
+          <div className="max-w-[210mm] mx-auto">
             <PrintReportView
               profile={profile}
               records={records}

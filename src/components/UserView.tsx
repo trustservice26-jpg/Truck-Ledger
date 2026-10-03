@@ -17,7 +17,7 @@ import {
 import { downloadLedgerPDF } from '../utils/pdfGenerator';
 import { WhatsAppShareModal } from './WhatsAppShareModal';
 import { MonthlyOverview } from './MonthlyOverview';
-import { Calendar, Filter, RotateCcw, Download, Printer, PlusCircle, FileText, CheckCircle2, MessageSquare, BookOpen, BarChart3, AlertCircle } from 'lucide-react';
+import { Calendar, Filter, RotateCcw, Download, Printer, PlusCircle, FileText, CheckCircle2, MessageSquare, BookOpen, BarChart3, AlertCircle, Globe } from 'lucide-react';
 
 interface UserViewProps {
   profile: Profile;
@@ -218,145 +218,12 @@ export const UserView: React.FC<UserViewProps> = ({
               {profile.name}
             </span>
             <span className="text-[10px] sm:text-[11px] font-medium px-2 py-0.5 bg-slate-100 text-slate-600 rounded">
-              {activeTab === 'reports' ? 'Reports' : 'Ledger'}
+              Daily Financial Record
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
             Log daily trip revenue, fuel fill-ups, expressway tolls, and vehicle running expenses.
           </p>
-        </div>
-
-        {/* Action buttons (grid on mobile, flex row on sm+) */}
-        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
-          {/* Primary Offline Backup Button */}
-          <button
-            onClick={handleExportAllRecordsCSV}
-            disabled={isExportingAllCsv}
-            className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-lg transition-colors shadow-2xs"
-            title="Export all financial records to a CSV file to backup your data offline"
-          >
-            {isExportingAllCsv ? (
-              <div className="w-3.5 h-3.5 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <Download className="w-3.5 h-3.5 text-emerald-700" />
-            )}
-            <span>Backup CSV (All)</span>
-          </button>
-
-          {onNavigateToPdf && (
-            <button
-              onClick={onNavigateToPdf}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-xs"
-              title="Open dedicated PDF Statement generator"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>Generate PDF</span>
-            </button>
-          )}
-
-          <button
-            onClick={() => handleOpenWhatsApp()}
-            className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors shadow-xs"
-            title="Share report on WhatsApp"
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>WhatsApp</span>
-          </button>
-
-          <button
-            onClick={handleDownloadPdf}
-            disabled={isGeneratingPdf}
-            className={`col-span-2 sm:col-span-1 flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors shadow-xs ${
-              downloadSuccess
-                ? 'bg-emerald-600 text-white'
-                : 'bg-slate-800 hover:bg-slate-900 text-white disabled:opacity-75'
-            }`}
-            title="Quick download official PDF ledger statement"
-          >
-            {downloadSuccess ? (
-              <>
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Downloaded!</span>
-              </>
-            ) : (
-              <>
-                <FileText className="w-3.5 h-3.5" />
-                <span>{isGeneratingPdf ? 'Generating...' : 'Quick PDF'}</span>
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={() => window.print()}
-            className="hidden sm:flex items-center gap-1.5 px-2.5 py-2 text-xs font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg transition-colors"
-            title="Print using browser print dialog"
-          >
-            <Printer className="w-3.5 h-3.5 text-slate-500" />
-            <span>Print</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Backup Notification Toast/Banner */}
-      {backupNotification && (
-        <div
-          className={`flex items-center justify-between p-3 rounded-xl border text-xs animate-fadeIn no-print ${
-            backupNotification.type === 'success'
-              ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
-              : backupNotification.type === 'error'
-              ? 'bg-rose-50 border-rose-200 text-rose-900'
-              : 'bg-blue-50 border-blue-200 text-blue-900'
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {backupNotification.type === 'success' ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            ) : (
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-            )}
-            <span className="font-medium">{backupNotification.message}</span>
-          </div>
-          <button
-            onClick={() => setBackupNotification(null)}
-            className="text-slate-500 hover:text-slate-800 font-bold ml-2 text-base leading-none p-1"
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      {/* Secondary Menu Bar Tabs for Quick Page Switching */}
-      <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-3 no-print overflow-x-auto no-scrollbar">
-        <div className="flex items-center gap-1 sm:gap-2">
-          <button
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg shadow-2xs"
-            title="Current Page: Daily Financial Records"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-blue-600" />
-            <span>Daily Financial Records</span>
-          </button>
-
-          {onNavigateToOverview && (
-            <button
-              onClick={onNavigateToOverview}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors"
-              title="Switch to Monthly Overview & Charts page"
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-slate-500" />
-              <span>Monthly Overview</span>
-            </button>
-          )}
-
-          {onNavigateToPdf && (
-            <button
-              onClick={onNavigateToPdf}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors"
-              title="Switch to PDF Statement Generator page"
-            >
-              <FileText className="w-3.5 h-3.5 text-slate-500" />
-              <span>PDF Generate</span>
-            </button>
-          )}
         </div>
       </div>
 
@@ -603,7 +470,6 @@ export const UserView: React.FC<UserViewProps> = ({
               onEdit={rec => setEditingRecord(rec)}
               onDelete={handleDeleteRecord}
               onShareWhatsApp={handleOpenWhatsApp}
-              onExportAllCSV={handleExportAllRecordsCSV}
               canEdit={true}
             />
           </div>
